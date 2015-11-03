@@ -1,0 +1,15 @@
+div.code-area {
+    width: 500px;
+}
+
+textarea.code-input {
+    width: 100%;
+    font-size: 14px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+div.code-display {
+    min-height: 50px;
+    background: #23241f;
+    color: white;
+}

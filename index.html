@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/monokai_sublime.min.css">
+    <link rel="stylesheet" href="index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-sanitize.js"></script>
+
+    <script src="index.js"></script>
+  </head>
+
+  <body>
+
+    <div ng-app="demo">
+      <div class="code-area" ng-controller="SimpleDemoController">
+
+        <textarea
+          class="code-input"
+          ng-change="renderCode(code.value)"
+          ng-model="code.value">
+        </textarea>
+
+        <br/>
+
+        <select
+          ng-change="renderCode(code.value)"
+          ng-model="selectedLanguage"
+          ng-options="language as language for language in availableLanguages">
+
+            <option value="">Language:</option>
+
+        </select>
+
+        <br/>
+
+        <div class="code-display">
+          <pre><code ng-bind-html="code.renderedValue"></code></pre>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+    "name": "highlightjs_demo",
+    "version": "1.0.0",
+    "description": "Demo of highlight.js API",
+    "main": "index.js",
+    "author": "Tony S. Yu",
+    "license": "BSD",
+    "dependencies": {
+        "angular": "^1.4.7",
+        "highlight.js": "^8.9.1"
+    },
+    "devDependencies": {
+        "http-server": "^0.8.5",
+        "webpack": "^1.12.2"
+    },
+    "scripts": {
+        "start": "http-server -p 8000 -o",
+        "webpack": "node_modules/webpack/bin/webpack.js app.js index.js"
+    }
+}
