@@ -1,7 +1,7 @@
 {
-    "name": "highlightjs_demo",
+    "name": "logviewer",
     "version": "1.0.0",
-    "description": "Demo of highlight.js API",
+    "description": "Viewer for log files with custom highlighting",
     "main": "index.js",
     "author": "Tony S. Yu",
     "license": "BSD",
