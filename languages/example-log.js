@@ -22,26 +22,26 @@ module.exports = function (hljs) {
 
     var TIME = {
         className: 'code',
-        begin: new RegExp(time),
+        begin: time,
     };
 
     var DATE = {
         className: 'comment',
         starts: TIME,
-        begin: new RegExp(date)
+        begin: date
     };
 
     var DATETIME = {
         contains: [DATE, TIME],
         starts: METHODPATH,
-        begin: new RegExp(datetime),
+        begin: datetime,
         returnBegin: true
     };
 
     var THREAD = {
         className: 'comment',
         starts: DATE,
-        begin: new RegExp('^' + thread),
+        begin: '^' + thread,
         end: '-'
     };
 
