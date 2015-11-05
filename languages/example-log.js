@@ -22,17 +22,20 @@ module.exports = function (hljs) {
 
     var TIME = {
         className: 'code',
-        starts: METHODPATH,
         begin: new RegExp(time),
-        end: ']',
-        excludeEnd: true
     };
 
     var DATE = {
         className: 'comment',
         starts: TIME,
-        begin: new RegExp(date),
-        end: ' '
+        begin: new RegExp(date)
+    };
+
+    var DATETIME = {
+        contains: [DATE, TIME],
+        starts: METHODPATH,
+        begin: new RegExp(datetime),
+        returnBegin: true
     };
 
     var THREAD = {
