@@ -7,10 +7,15 @@ angular.module("demo", ["ngSanitize"])
     .controller("SimpleDemoController", function ($scope) {
         "use strict";
 
+        hljs.registerLanguage(
+            'example-log',
+            require('./languages/example-log.js')
+        );
+
         hljs.configure({ useBR: true });
 
         $scope.availableLanguages = hljs.listLanguages();
-        $scope.selectedLanguage = 'python';
+        $scope.selectedLanguage = 'example-log';
         $scope.code = {value: '', renderedValue: ''};
 
         $scope.renderCode = function (code) {
