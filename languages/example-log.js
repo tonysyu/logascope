@@ -10,9 +10,8 @@ module.exports = function (hljs) {
     "use strict";
 
     var thread = '\\[\\d+:\\d+\\]',
-        time = '\\d{2}:\\d{2}:\\d{2} (A|P)M',
-        date = '\\d{2}/\\d{2}/\\d{4}',
-        datetime = '\\[' + date + ' ' + time + '\\]';
+        time = '\\s\\d{2}:\\d{2}:\\d{2} (A|P)M',
+        date = '\\d{2}/\\d{2}/\\d{4}';
 
     var METHODPATH = {
         className: 'string',
@@ -22,7 +21,7 @@ module.exports = function (hljs) {
 
     var TIME = {
         className: 'code',
-        begin: time,
+        begin: time
     };
 
     var DATE = {
@@ -32,25 +31,23 @@ module.exports = function (hljs) {
     };
 
     var DATETIME = {
+        className: 'comment',
         contains: [DATE, TIME],
         starts: METHODPATH,
-        begin: datetime,
-        returnBegin: true
+        begin: '\\[',
+        end: '\\]'
     };
 
     var THREAD = {
         className: 'comment',
-        starts: DATE,
+        starts: DATETIME,
         begin: '^' + thread,
         end: '-'
     };
 
     return {
-        keywords: {
-            keyword: 'Package'
-        },
         contains: [
-            THREAD, DATE, TIME
+            THREAD
         ]
     };
 };
