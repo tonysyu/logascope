@@ -12,10 +12,6 @@
 module.exports = function (hljs) {
     "use strict";
 
-    var thread = '\\[\\d+:\\d+\\]',
-        time = '\\s\\d{2}:\\d{2}:\\d{2} (A|P)M',
-        date = '\\d{2}/\\d{2}/\\d{4}';
-
     var MESSAGE = {
         begin: '\\s*\\w',
         end: /([\r\n]\[|\Z)/,
@@ -40,13 +36,13 @@ module.exports = function (hljs) {
 
     var TIME = {
         className: 'code time',
-        begin: time
+        begin: '\\s\\d{2}:\\d{2}:\\d{2} (A|P)M'
     };
 
     var DATE = {
         className: 'comment date',
         starts: TIME,
-        begin: date
+        begin: '\\d{2}/\\d{2}/\\d{4}'
     };
 
     var DATETIME = {
@@ -60,7 +56,7 @@ module.exports = function (hljs) {
     var THREAD = {
         className: 'comment thread',
         starts: DATETIME,
-        begin: '^' + thread,
+        begin: '^\\[\\d+:\\d+\\]',
         end: '-'
     };
 
