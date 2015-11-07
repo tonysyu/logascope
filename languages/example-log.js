@@ -2,8 +2,11 @@
 
 /*
 [111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: message
-        []
+    select * from [mytable] where a=b;
 [111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: message
+    select * from mytable where a=b;
+[111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: message
+    {"a": 1, "b": 2}
 */
 
 module.exports = function (hljs) {
@@ -14,9 +17,9 @@ module.exports = function (hljs) {
         date = '\\d{2}/\\d{2}/\\d{4}';
 
     var MESSAGE = {
-        endsWithParent: true,
         begin: '\\s*\\w',
-        end: '[\r\n]',
+        end: /([\r\n]\[|\Z)/,
+        returnEnd: true,
         subLanguage: ['json', 'sql']
     };
 
