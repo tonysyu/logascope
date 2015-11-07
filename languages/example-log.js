@@ -13,6 +13,13 @@ module.exports = function (hljs) {
         time = '\\s\\d{2}:\\d{2}:\\d{2} (A|P)M',
         date = '\\d{2}/\\d{2}/\\d{4}';
 
+    var MESSAGE = {
+        endsWithParent: true,
+        begin: '\\s*\\w',
+        end: '[\r\n]',
+        subLanguage: ['json', 'sql']
+    };
+
     var METHODNAME = {
         className: 'function method',
         endsParent: true,
@@ -23,6 +30,7 @@ module.exports = function (hljs) {
     var METHODPATH = {
         className: 'string',
         contains: [METHODNAME],
+        starts: MESSAGE,
         begin: '\\s',
         end: /:/
     };
