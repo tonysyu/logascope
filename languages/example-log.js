@@ -13,10 +13,18 @@ module.exports = function (hljs) {
         time = '\\s\\d{2}:\\d{2}:\\d{2} (A|P)M',
         date = '\\d{2}/\\d{2}/\\d{4}';
 
+    var METHODNAME = {
+        className: 'function',
+        endsParent: true,
+        begin: '\\w+:',
+        end: '\\s'
+    };
+
     var METHODPATH = {
         className: 'string',
-        begin: /[\w.]+/,
-        end: ':'
+        contains: [METHODNAME],
+        begin: '\\s',
+        end: /:/
     };
 
     var TIME = {
@@ -35,7 +43,7 @@ module.exports = function (hljs) {
         contains: [DATE, TIME],
         starts: METHODPATH,
         begin: '\\[',
-        end: '\\]'
+        end: '\\]\\s*'
     };
 
     var THREAD = {
