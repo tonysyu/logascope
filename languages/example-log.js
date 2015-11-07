@@ -14,7 +14,7 @@ module.exports = function (hljs) {
         date = '\\d{2}/\\d{2}/\\d{4}';
 
     var METHODNAME = {
-        className: 'function',
+        className: 'function method',
         endsParent: true,
         begin: '\\w+:',
         end: '\\s'
@@ -28,18 +28,18 @@ module.exports = function (hljs) {
     };
 
     var TIME = {
-        className: 'code',
+        className: 'code time',
         begin: time
     };
 
     var DATE = {
-        className: 'comment',
+        className: 'comment date',
         starts: TIME,
         begin: date
     };
 
     var DATETIME = {
-        className: 'comment',
+        className: 'comment datetime',
         contains: [DATE, TIME],
         starts: METHODPATH,
         begin: '\\[',
@@ -47,7 +47,7 @@ module.exports = function (hljs) {
     };
 
     var THREAD = {
-        className: 'comment',
+        className: 'comment thread',
         starts: DATETIME,
         begin: '^' + thread,
         end: '-'
