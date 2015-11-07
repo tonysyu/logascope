@@ -1,12 +1,12 @@
 /*global module*/
 
 /*
-[111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: message
+[111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: sql query
     select * from [mytable] where a=b;
-[111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: message
+[111:2222]-[10/23/2015 12:00:01 AM] Package.Module.Class.Method: sql query
     select * from mytable where a=b;
-[111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: message
-    {"a": 1, "b": 2}
+[111:2222]-[10/23/2015 12:00:02 AM] Package.Module.Class.Method: js object
+    data = {"a": 1, "b": 2}
 */
 
 module.exports = function (hljs) {
@@ -16,7 +16,7 @@ module.exports = function (hljs) {
         begin: '\\s*\\w',
         end: /([\r\n]\[|\Z)/,
         returnEnd: true,
-        subLanguage: ['json', 'sql']
+        subLanguage: ['sql', 'javascript']
     };
 
     var METHODNAME = {
