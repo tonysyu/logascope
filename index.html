@@ -16,6 +16,8 @@
     <div ng-app="demo">
       <div class="code-area" ng-controller="SimpleDemoController">
 
+        <input type="file" load-text="loadText"/>
+
         <textarea
           class="code-input"
           ng-change="renderCode(code.value)"

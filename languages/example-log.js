@@ -1,12 +1,12 @@
 /*global module*/
+/*jslint var: true*/
 
 /*
-[111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: sql query
-    select * from [mytable] where a=b;
-[111:2222]-[10/23/2015 12:00:01 AM] Package.Module.Class.Method: sql query
-    select * from mytable where a=b;
-[111:2222]-[10/23/2015 12:00:02 AM] Package.Module.Class.Method: js object
-    data = {"a": 1, "b": 2}
+highlight.js parser for logs with the following form:
+
+    [111:2222]-[01/01/2015 12:00:00 AM] Package.Module.Class.Method: message
+        more info
+    ...
 */
 
 module.exports = function (hljs) {
@@ -14,7 +14,7 @@ module.exports = function (hljs) {
 
     var MESSAGE = {
         begin: '\\s*\\w',
-        end: /([\r\n]\[|\Z)/,
+        end: /([\r\n]\[|\Z)/,  // The start of the next log entry.
         returnEnd: true,
         subLanguage: ['sql', 'javascript']
     };

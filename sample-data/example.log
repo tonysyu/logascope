@@ -1,0 +1,6 @@
+[111:2222]-[10/23/2015 12:00:00 AM] Package.Module.Class.Method: sql query
+    select * from [mytable] where a=b;
+[111:2222]-[10/23/2015 12:00:01 AM] Package.Module.Class.Method: sql query
+    select * from mytable where a=b;
+[111:2222]-[10/23/2015 12:00:02 AM] Package.Module.Class.Method: js object
+    data = {"a": 1, "b": 2}
