@@ -1,9 +1,7 @@
 /*global module, require*/
 
 module.exports = {
-    entry: {
-        app: ["./app.js"]
-    },
+    entry: "./app",
     output: {
         filename: "index.js"
     }

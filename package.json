@@ -17,6 +17,6 @@
   "scripts": {
     "start": "http-server -p 8080 -o",
     "dev-server": "node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline",
-    "webpack": "node_modules/webpack/bin/webpack.js app.js index.js"
+    "webpack": "node_modules/webpack/bin/webpack.js"
   }
 }
