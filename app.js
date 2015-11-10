@@ -1,5 +1,7 @@
 /*global angular, require*/
 
+var angular = require('angular');
+var sanitize = require('angular-sanitize');
 var hljs = require('highlight.js');
 
 angular.module("demo", ["ngSanitize"])

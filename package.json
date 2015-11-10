@@ -2,11 +2,13 @@
   "name": "logviewer",
   "version": "1.0.0",
   "description": "Viewer for log files with custom highlighting",
-  "main": "index.js",
+  "main": "main.js",
   "author": "Tony S. Yu",
   "license": "BSD",
   "dependencies": {
     "angular": "^1.4.7",
+    "angular-sanitize": "^1.4.7",
+    "electron-prebuilt": "^0.34.3",
     "highlight.js": "^8.9.1"
   },
   "devDependencies": {
@@ -17,6 +19,7 @@
   "scripts": {
     "start": "http-server -p 8080 -o",
     "dev-server": "node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline",
-    "webpack": "node_modules/webpack/bin/webpack.js"
+    "webpack": "node_modules/webpack/bin/webpack.js",
+    "standalone": "node_modules/.bin/electron ."
   }
 }

@@ -3,6 +3,6 @@
 module.exports = {
     entry: "./app",
     output: {
-        filename: "index.js"
+        filename: "bundle.js"
     }
 };
