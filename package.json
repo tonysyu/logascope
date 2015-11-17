@@ -1,5 +1,5 @@
 {
-  "name": "logviewer",
+  "name": "logascope",
   "version": "1.0.0",
   "description": "Viewer for log files with custom highlighting",
   "main": "main.js",

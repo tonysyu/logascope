@@ -1,17 +1,18 @@
-highlight.js Demo
-=================
+logascope
+=========
+
+`logascope` is a log viewer implemented using
+[AngularJS](https://angularjs.org/),
+[highlight.js](https://highlightjs.org/),
+and [Electron](http://electron.atom.io/).
 
 Usage
 -----
 
-To install dependencies, run:
+To install `logascope`, run:
 
     npm install
 
-This demo bundles files using `webpack`, which you can run using:
-
-    npm run-script webpack
-
-Finally, start up a server to view the demo:
+After that, you can start the viewer by running:
 
     npm start
