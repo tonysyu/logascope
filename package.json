@@ -11,15 +11,8 @@
     "electron-prebuilt": "^0.34.3",
     "highlight.js": "^8.9.1"
   },
-  "devDependencies": {
-    "http-server": "^0.8.5",
-    "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.1"
-  },
+  "devDependencies": {},
   "scripts": {
-    "start": "http-server -p 8080 -o",
-    "dev-server": "node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline",
-    "webpack": "node_modules/webpack/bin/webpack.js",
-    "standalone": "node_modules/.bin/electron ."
+    "start": "node_modules/.bin/electron ."
   }
 }
