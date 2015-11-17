@@ -1,5 +1,6 @@
 /*global angular, require*/
 
+var fs = require('fs');
 var angular = require('angular');
 var sanitize = require('angular-sanitize');
 var hljs = require('highlight.js');
@@ -39,14 +40,16 @@ angular.module("demo", ["ngSanitize"])
             },
             link: function (scope, element, attributes) {
                 element.bind("change", function (changeEvent) {
-                    var filename = changeEvent.target.files[0],
-                        reader = new FileReader();
-                    reader.onload = function (loadEvent) {
+                    var file = changeEvent.target.files[0];
+                    fs.readFile(file.path, 'utf8', function (error, text) {
+                        if (error) {
+                            throw error;
+                        }
+                        // Use $apply since file reading is asynchronous.
                         scope.$apply(function () {
-                            scope.loadText(reader.result);
+                            scope.loadText(text);
                         });
-                    };
-                    reader.readAsText(filename);
+                    });
                 });
             }
         };
