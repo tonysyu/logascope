@@ -20,7 +20,7 @@ angular.module("demo", ["ngSanitize"])
         $scope.selectedLanguage = 'example-log';
         $scope.code = {value: '', renderedValue: ''};
 
-        $scope.loadText = function (text) {
+        $scope.watchFile = function (text) {
             $scope.code.value = text;
             $scope.renderCode(text);
         };
@@ -31,12 +31,12 @@ angular.module("demo", ["ngSanitize"])
             $scope.code.renderedValue = code;
         };
     })
-    .directive("loadText", [function () {
+    .directive("watchFile", [function () {
         "use strict";
 
         return {
             scope: {
-                loadText: "="
+                watchFile: "="
             },
             link: function (scope, element, attributes) {
                 element.bind("change", function (changeEvent) {
@@ -47,7 +47,7 @@ angular.module("demo", ["ngSanitize"])
                         }
                         // Use $apply since file reading is asynchronous.
                         scope.$apply(function () {
-                            scope.loadText(text);
+                            scope.watchFile(text);
                         });
                     });
                 });
