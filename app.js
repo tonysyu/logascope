@@ -32,8 +32,8 @@ angular.module("demo", ["ngSanitize"])
                 $scope.code.renderedValue = $scope.renderCode(text);
             } else if ($scope.selectedFileMode === 'tail') {
                 var tail = new Tail(file.path);
-                $scope.code.value = '';
-                $scope.code.renderedValue = '';
+                $scope.code.value = 'Start watching: ' + file.path + '\n';
+                $scope.code.renderedValue = $scope.code.value;
 
                 tail.on('line', function (text) {
                     $scope.code.value += text + '\n';
