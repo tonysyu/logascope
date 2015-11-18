@@ -14,15 +14,9 @@
 
         <input type="file" load-text="loadText"/>
 
-        <textarea
-          class="code-input"
-          ng-change="renderCode(code.value)"
-          ng-model="code.value">
-        </textarea>
-
-        <br/>
-
+        <label for="syntax-selector">Syntax:</label>
         <select
+          name="syntax-selector"
           ng-change="renderCode(code.value)"
           ng-model="selectedLanguage"
           ng-options="language as language for language in availableLanguages">
