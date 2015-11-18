@@ -1,9 +1,10 @@
 /*global angular, require*/
 
-var fs = require('fs');
 var angular = require('angular');
-var sanitize = require('angular-sanitize');
+var fs = require('fs');
 var hljs = require('highlight.js');
+var sanitize = require('angular-sanitize');
+var Tail = require('tail').Tail;
 
 angular.module("demo", ["ngSanitize"])
     .controller("SimpleDemoController", function ($scope) {
@@ -21,14 +22,24 @@ angular.module("demo", ["ngSanitize"])
         $scope.availableLanguages = hljs.listLanguages();
         $scope.selectedLanguage = 'example-log';
 
-        $scope.availableFileModes = ['load'];
-        $scope.fileMode = 'load';
+        $scope.availableFileModes = ['load', 'tail'];
+        $scope.selectedFileMode = 'tail';
 
         $scope.watchFile = function (file) {
-            if ($scope.fileMode) {
+            if ($scope.selectedFileMode === 'load') {
                 var text = fs.readFileSync(file.path, 'utf8');
                 $scope.code.value = text;
                 $scope.code.renderedValue = $scope.renderCode(text);
+            } else if ($scope.selectedFileMode === 'tail') {
+                var tail = new Tail(file.path);
+                $scope.code.value = '';
+                $scope.code.renderedValue = '';
+
+                tail.on('line', function (text) {
+                    $scope.code.value += text + '\n';
+                    $scope.code.renderedValue += $scope.renderCode(text) + '\n';
+                    $scope.$apply();
+                });
             }
         };
 
