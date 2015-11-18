@@ -16,40 +16,39 @@ angular.module("demo", ["ngSanitize"])
 
         hljs.configure({ useBR: true });
 
-        $scope.availableLanguages = hljs.listLanguages();
-        $scope.selectedLanguage = 'example-log';
         $scope.code = {value: '', renderedValue: ''};
 
-        $scope.watchFile = function (text) {
-            $scope.code.value = text;
-            $scope.renderCode(text);
+        $scope.availableLanguages = hljs.listLanguages();
+        $scope.selectedLanguage = 'example-log';
+
+        $scope.availableFileModes = ['load'];
+        $scope.fileMode = 'load';
+
+        $scope.watchFile = function (file) {
+            if ($scope.fileMode) {
+                var text = fs.readFileSync(file.path, 'utf8');
+                $scope.code.value = text;
+                $scope.code.renderedValue = $scope.renderCode(text);
+            }
         };
 
-        $scope.renderCode = function (code) {
-            code = hljs.highlight($scope.selectedLanguage, code).value;
-            code = hljs.fixMarkup(code);
-            $scope.code.renderedValue = code;
+        $scope.renderCode = function (text) {
+            text = hljs.highlight($scope.selectedLanguage, text).value;
+            return hljs.fixMarkup(text);
         };
     })
     .directive("watchFile", [function () {
         "use strict";
 
         return {
-            scope: {
-                watchFile: "="
-            },
             link: function (scope, element, attributes) {
                 element.bind("change", function (changeEvent) {
                     var file = changeEvent.target.files[0];
-                    fs.readFile(file.path, 'utf8', function (error, text) {
-                        if (error) {
-                            throw error;
-                        }
-                        // Use $apply since file reading is asynchronous.
-                        scope.$apply(function () {
-                            scope.watchFile(text);
-                        });
+                    // Use $apply since we're reacting to an event.
+                    scope.$apply(function () {
+                        scope.watchFile(file);
                     });
+
                 });
             }
         };
