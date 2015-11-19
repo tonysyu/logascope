@@ -29,8 +29,6 @@ app.on('ready', function () {
     // and load the index.html of the app.
     mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
-    mainWindow.openDevTools();
-
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time

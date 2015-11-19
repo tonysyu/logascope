@@ -10,6 +10,8 @@ angular.module("demo", ["ngSanitize"])
     .controller("SimpleDemoController", function ($scope) {
         "use strict";
 
+        var activeTail, watchedFile;
+
         hljs.registerLanguage(
             'example-log',
             require('./languages/example-log.js')
@@ -32,20 +34,31 @@ angular.module("demo", ["ngSanitize"])
         }
 
         function tailCodeFromFile(filePath) {
-                $scope.code.value = 'Start watching: ' + filePath + '\n';
-                $scope.code.renderedValue = $scope.code.value;
+            $scope.code.value = 'Start watching: ' + filePath + '\n';
+            $scope.code.renderedValue = $scope.code.value;
 
-                var tail = new Tail(filePath);
-                tail.on('line', function (text) {
-                    $scope.code.value += text + '\n';
-                    $scope.code.renderedValue += $scope.renderCode(text) + '\n';
-                    $scope.$apply();
-                });
+            activeTail = new Tail(filePath);
+            activeTail.on('line', function (text) {
+                $scope.code.value += text + '\n';
+                $scope.code.renderedValue += $scope.renderCode(text) + '\n';
+                $scope.$apply();
+            });
+        }
+
+        function resetTail() {
+            if (activeTail) {
+                activeTail.unwatch();
+                activeTail = null;
+            }
         }
 
         $scope.watchFile = function (filePath) {
+            // Save file path so we can reload if needed.
+            watchedFile = filePath;
+
+            resetTail();
+
             if (!filePath) {
-                console.log("No file path specified");
                 return;
             }
 
@@ -55,6 +68,12 @@ angular.module("demo", ["ngSanitize"])
                 tailCodeFromFile(filePath);
             }
         };
+
+        $scope.$watch('selectedFileMode', function (newMode) {
+            if (watchedFile) {
+                $scope.watchFile(watchedFile);
+            }
+        });
 
         $scope.renderCode = function (text) {
             text = hljs.highlight($scope.selectedLanguage, text).value;
@@ -68,11 +87,12 @@ angular.module("demo", ["ngSanitize"])
             link: function (scope, element, attributes) {
                 element.bind("change", function (changeEvent) {
                     var file = changeEvent.target.files[0];
-                    // Use $apply since we're reacting to an event.
-                    scope.$apply(function () {
-                        scope.watchFile(file.path);
-                    });
-
+                    if (file) {
+                        // Use $apply since we're reacting to an event.
+                        scope.$apply(function () {
+                            scope.watchFile(file.path);
+                        });
+                    }
                 });
             }
         };
