@@ -25,21 +25,34 @@ angular.module("demo", ["ngSanitize"])
         $scope.availableFileModes = ['load', 'tail'];
         $scope.selectedFileMode = 'tail';
 
-        $scope.watchFile = function (file) {
-            if ($scope.selectedFileMode === 'load') {
-                var text = fs.readFileSync(file.path, 'utf8');
-                $scope.code.value = text;
-                $scope.code.renderedValue = $scope.renderCode(text);
-            } else if ($scope.selectedFileMode === 'tail') {
-                var tail = new Tail(file.path);
-                $scope.code.value = 'Start watching: ' + file.path + '\n';
+        function loadCodeFromFile(filePath) {
+            var text = fs.readFileSync(filePath, 'utf8');
+            $scope.code.value = text;
+            $scope.code.renderedValue = $scope.renderCode(text);
+        }
+
+        function tailCodeFromFile(filePath) {
+                $scope.code.value = 'Start watching: ' + filePath + '\n';
                 $scope.code.renderedValue = $scope.code.value;
 
+                var tail = new Tail(filePath);
                 tail.on('line', function (text) {
                     $scope.code.value += text + '\n';
                     $scope.code.renderedValue += $scope.renderCode(text) + '\n';
                     $scope.$apply();
                 });
+        }
+
+        $scope.watchFile = function (filePath) {
+            if (!filePath) {
+                console.log("No file path specified");
+                return;
+            }
+
+            if ($scope.selectedFileMode === 'load') {
+                loadCodeFromFile(filePath);
+            } else if ($scope.selectedFileMode === 'tail') {
+                tailCodeFromFile(filePath);
             }
         };
 
@@ -57,7 +70,7 @@ angular.module("demo", ["ngSanitize"])
                     var file = changeEvent.target.files[0];
                     // Use $apply since we're reacting to an event.
                     scope.$apply(function () {
-                        scope.watchFile(file);
+                        scope.watchFile(file.path);
                     });
 
                 });
