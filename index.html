@@ -12,7 +12,7 @@
     <div ng-app="demo">
       <div class="code-area" ng-controller="SimpleDemoController">
 
-        <input type="file" load-text="loadText"/>
+        <input type="file" watch-file />
 
         <label for="syntax-selector">Syntax:</label>
         <select
@@ -23,6 +23,13 @@
         </select>
 
         <br/>
+
+        <label for="file-mode-selector">File mode:</label>
+        <select
+          name="file-mode-selector"
+          ng-model="selectedFileMode"
+          ng-options="mode as mode for mode in availableFileModes">
+        </select>
 
         <div class="code-display">
           <pre><code ng-bind-html="code.renderedValue"></code></pre>
