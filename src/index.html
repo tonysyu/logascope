@@ -44,14 +44,15 @@
             <select
               name="file-mode-selector"
               ng-model="selectedFileMode"
+              ng-change="onFileModeChange()"
               ng-options="mode as mode for mode in availableFileModes">
             </select>
 
-            <label for="syntax-selector">Syntax:</label>
+            <label for="language-selector">Syntax:</label>
             <select
-              name="syntax-selector"
-              ng-change="renderCode(code.value)"
+              name="language-selector"
               ng-model="selectedLanguage"
+              ng-change="onLanguageChange()"
               ng-options="language as language for language in availableLanguages">
             </select>
 

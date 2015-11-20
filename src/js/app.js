@@ -50,7 +50,7 @@ angular.module("demo", ["ngSanitize"])
             });
         }
 
-        function resetTail() {
+        function unwatchTail() {
             if (activeTail) {
                 activeTail.unwatch();
                 activeTail = null;
@@ -58,11 +58,9 @@ angular.module("demo", ["ngSanitize"])
         }
 
         $scope.watchFile = function (filePath) {
-            // Save file path so we can reload if needed.
-            watchedFile = filePath;
+            unwatchTail();
+            watchedFile = filePath;  // Save file so we can reload if needed.
             $scope.fileInfo = watchedFile + ':';
-
-            resetTail();
 
             if (!filePath) {
                 return;
@@ -75,11 +73,15 @@ angular.module("demo", ["ngSanitize"])
             }
         };
 
-        $scope.$watch('selectedFileMode', function (newMode) {
+        $scope.onFileModeChange = function () {
             if (watchedFile) {
                 $scope.watchFile(watchedFile);
             }
-        });
+        };
+
+        $scope.onLanguageChange = function () {
+            $scope.code.renderedValue = $scope.renderCode($scope.code.value);
+        };
 
         $scope.renderCode = function (text) {
             text = hljs.highlight($scope.selectedLanguage, text).value;
