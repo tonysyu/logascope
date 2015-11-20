@@ -6,11 +6,16 @@ var hljs = require('highlight.js');
 var sanitize = require('angular-sanitize');
 var Tail = require('tail').Tail;
 
+
+
 angular.module("demo", ["ngSanitize"])
     .controller("SimpleDemoController", function ($scope) {
         "use strict";
 
-        var activeTail, watchedFile;
+        var activeTail, watchedFile,
+            noFileMessage = "Select a file to watch";
+
+        $scope.fileInfo = noFileMessage;
 
         hljs.registerLanguage(
             'example-log',
@@ -55,6 +60,7 @@ angular.module("demo", ["ngSanitize"])
         $scope.watchFile = function (filePath) {
             // Save file path so we can reload if needed.
             watchedFile = filePath;
+            $scope.fileInfo = watchedFile + ':';
 
             resetTail();
 
