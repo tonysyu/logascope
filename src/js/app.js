@@ -33,22 +33,34 @@ angular.module('demo', ['ngSanitize', 'cfp.hotkeys'])
         $scope.selectedFileMode = 'tail';
 
         $scope.pageSearch = {
-            backwards: false,
             caseSensitive: false,
             searchText: '',
             wrap: true
         };
-        $scope.searchPage = function () {
-            if ($scope.pageSearch.searchText.length > 2) {
+
+        var createSearchCallback = function (options) {
+            options = options || {};
+            var backwards = options['backwards'] || false;
+
+            return function (e) {
+                if (!$scope.pageSearch.searchText) {
+                    return;
+                }
                 var p = $scope.pageSearch;
-                window.find(p.searchText, p.caseSensitive, p.backwards, p.wrap);
-            }
+                window.find(p.searchText, p.caseSensitive, backwards, p.wrap);
+            };
         };
 
         hotkeys.add({
             combo: 'ctrl+f',
-            callback: $scope.searchPage
+            callback: createSearchCallback()
         });
+
+        hotkeys.add({
+            combo: 'ctrl+shift+f',
+            callback: createSearchCallback({backwards: true})
+        });
+
 
         function loadCodeFromFile(filePath) {
             var text = fs.readFileSync(filePath, 'utf8');

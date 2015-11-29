@@ -58,17 +58,22 @@
           </fieldset>
         </form>
 
-        <form class="pure-form pure-form-stacked">
+        <form class="pure-form pure-form-aligned">
           <fieldset>
+            <div class="pure-control-group">
+              <label for="search-text">Find:</label>
+              <input name="search-text" ng-model="pageSearch.searchText"></input>
+            </div>
 
-            <label for="search-text">Find:</label>
-            <input name="search-text" ng-model="pageSearch.searchText"></input>
+            <div class="pure-control-group">
+              <label for="search-wrap">Wrap-around:</label>
+              <input type="checkbox" name="search-wrap" ng-model="pageSearch.wrap"></input>
+            </div>
 
-            <label for="search-wrap">Wrap-around:</label>
-            <input type="checkbox" name="search-wrap" ng-model="pageSearch.wrap"></input>
-
-            <label for="search-case-sensitive">Case-sensitive:</label>
-            <input type="checkbox" name="search-case-sensitive" ng-model="pageSearch.caseSensitive"></input>
+            <div class="pure-control-group">
+              <label for="search-case-sensitive">Case-sensitive:</label>
+              <input type="checkbox" name="search-case-sensitive" ng-model="pageSearch.caseSensitive"></input>
+            </div>
 
           </fieldset>
         </form>
