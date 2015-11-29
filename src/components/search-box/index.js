@@ -34,6 +34,6 @@ angular.module('logascope')
     .directive("searchBox", [function () {
         return {
             controller: 'searchBoxController',
-            templateUrl: 'html/search-box.html'
+            templateUrl: 'components/search-box/index.html'
         };
     }]);
