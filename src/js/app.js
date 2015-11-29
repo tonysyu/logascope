@@ -1,15 +1,14 @@
-/*global angular, require*/
+/*global require*/
 
 var angular = require('angular');
 var fs = require('fs');
-var hljs = require('highlight.js');
 var sanitize = require('angular-sanitize');
 var hotkeys = require('angular-hotkeys');
 var Tail = require('tail').Tail;
 
 
 angular.module('logascope', ['ngSanitize', 'cfp.hotkeys'])
-    .controller('AppController', function ($scope, hotkeys) {
+    .controller('AppController', function ($scope, highlightText) {
         'use strict';
 
         var activeTail, watchedFile,
@@ -17,16 +16,9 @@ angular.module('logascope', ['ngSanitize', 'cfp.hotkeys'])
 
         $scope.fileInfo = noFileMessage;
 
-        hljs.registerLanguage(
-            'example-log',
-            require('./languages/example-log.js')
-        );
-
-        hljs.configure({ useBR: true });
-
         $scope.code = {value: '', renderedValue: ''};
 
-        $scope.availableLanguages = hljs.listLanguages();
+        $scope.availableLanguages = highlightText.availableLanguages;
         $scope.selectedLanguage = 'example-log';
 
         $scope.availableFileModes = ['load', 'tail'];
@@ -84,8 +76,7 @@ angular.module('logascope', ['ngSanitize', 'cfp.hotkeys'])
         };
 
         $scope.renderCode = function (text) {
-            text = hljs.highlight($scope.selectedLanguage, text).value;
-            return hljs.fixMarkup(text);
+            return highlightText.render($scope.selectedLanguage, text);
         };
     })
     .directive("watchFile", [function () {
