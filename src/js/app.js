@@ -8,8 +8,8 @@ var hotkeys = require('angular-hotkeys');
 var Tail = require('tail').Tail;
 
 
-angular.module('demo', ['ngSanitize', 'cfp.hotkeys'])
-    .controller('SimpleDemoController', function ($scope, hotkeys) {
+angular.module('logascope', ['ngSanitize', 'cfp.hotkeys'])
+    .controller('AppController', function ($scope, hotkeys) {
         'use strict';
 
         var activeTail, watchedFile,
