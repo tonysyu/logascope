@@ -4,13 +4,13 @@ var angular = require('angular');
 var fs = require('fs');
 var hljs = require('highlight.js');
 var sanitize = require('angular-sanitize');
+var hotkeys = require('angular-hotkeys');
 var Tail = require('tail').Tail;
 
 
-
-angular.module("demo", ["ngSanitize"])
-    .controller("SimpleDemoController", function ($scope) {
-        "use strict";
+angular.module('demo', ['ngSanitize', 'cfp.hotkeys'])
+    .controller('SimpleDemoController', function ($scope, hotkeys) {
+        'use strict';
 
         var activeTail, watchedFile,
             noFileMessage = "Select a file to watch";
@@ -31,6 +31,24 @@ angular.module("demo", ["ngSanitize"])
 
         $scope.availableFileModes = ['load', 'tail'];
         $scope.selectedFileMode = 'tail';
+
+        $scope.pageSearch = {
+            backwards: false,
+            caseSensitive: false,
+            searchText: '',
+            wrap: true
+        };
+        $scope.searchPage = function () {
+            if ($scope.pageSearch.searchText.length > 2) {
+                var p = $scope.pageSearch;
+                window.find(p.searchText, p.caseSensitive, p.backwards, p.wrap);
+            }
+        };
+
+        hotkeys.add({
+            combo: 'ctrl+f',
+            callback: $scope.searchPage
+        });
 
         function loadCodeFromFile(filePath) {
             var text = fs.readFileSync(filePath, 'utf8');

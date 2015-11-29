@@ -58,6 +58,21 @@
           </fieldset>
         </form>
 
+        <form class="pure-form pure-form-stacked">
+          <fieldset>
+
+            <label for="search-text">Find:</label>
+            <input name="search-text" ng-model="pageSearch.searchText"></input>
+
+            <label for="search-wrap">Wrap-around:</label>
+            <input type="checkbox" name="search-wrap" ng-model="pageSearch.wrap"></input>
+
+            <label for="search-case-sensitive">Case-sensitive:</label>
+            <input type="checkbox" name="search-case-sensitive" ng-model="pageSearch.caseSensitive"></input>
+
+          </fieldset>
+        </form>
+
         <div class="content">
 
           <span>{{ fileInfo }}</span>

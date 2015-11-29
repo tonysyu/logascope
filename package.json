@@ -7,6 +7,7 @@
   "license": "BSD",
   "dependencies": {
     "angular": "^1.4.7",
+    "angular-hotkeys": "^1.6.0",
     "angular-sanitize": "^1.4.7",
     "electron-prebuilt": "^0.34.3",
     "highlight.js": "^8.9.1",
