@@ -2,17 +2,25 @@
   <fieldset>
     <div class="pure-control-group">
       <label for="search-text">Find:</label>
-      <input name="search-text" ng-model="pageSearch.searchText"></input>
+      <input name="search-text" ng-model="ctrl.pageSearch.searchText"></input>
     </div>
 
     <div class="pure-control-group">
       <label for="search-wrap">Wrap-around:</label>
-      <input type="checkbox" name="search-wrap" ng-model="pageSearch.wrap"></input>
+      <input
+        type="checkbox"
+        name="search-wrap"
+        ng-model="ctrl.pageSearch.wrap">
+      </input>
     </div>
 
     <div class="pure-control-group">
       <label for="search-case-sensitive">Case-sensitive:</label>
-      <input type="checkbox" name="search-case-sensitive" ng-model="pageSearch.caseSensitive"></input>
+      <input
+        type="checkbox"
+        name="search-case-sensitive"
+        ng-model="ctrl.pageSearch.caseSensitive">
+      </input>
     </div>
 
   </fieldset>

@@ -1,8 +1,10 @@
 var angular = require('angular');
 
 angular.module('logascope')
-    .controller('searchBoxController', ['$scope', 'hotkeys', function($scope, hotkeys) {
-        $scope.pageSearch = {
+    .controller('searchBoxController', ['hotkeys', function(hotkeys) {
+        // Create local `pageSearch` so we don't have to worry about what
+        // `this` binds to in closures.
+        var pageSearch = this.pageSearch = {
             caseSensitive: false,
             searchText: '',
             wrap: true
@@ -13,10 +15,10 @@ angular.module('logascope')
             var backwards = options['backwards'] || false;
 
             return function (e) {
-                if (!$scope.pageSearch.searchText) {
+                if (!pageSearch.searchText) {
                     return;
                 }
-                var p = $scope.pageSearch;
+                var p = pageSearch;
                 window.find(p.searchText, p.caseSensitive, backwards, p.wrap);
             };
         };
@@ -34,6 +36,8 @@ angular.module('logascope')
     .directive("searchBox", [function () {
         return {
             controller: 'searchBoxController',
+            controllerAs: 'ctrl',
+            bindToController: true,
             templateUrl: 'components/search-box/index.html'
         };
     }]);
