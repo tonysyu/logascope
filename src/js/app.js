@@ -78,21 +78,4 @@ angular.module('logascope', ['ngSanitize', 'cfp.hotkeys'])
         $scope.renderCode = function (text) {
             return highlightText.render($scope.selectedLanguage, text);
         };
-    })
-    .directive("watchFile", [function () {
-        "use strict";
-
-        return {
-            link: function (scope, element, attributes) {
-                element.bind("change", function (changeEvent) {
-                    var file = changeEvent.target.files[0];
-                    if (file) {
-                        // Use $apply since we're reacting to an event.
-                        scope.$apply(function () {
-                            scope.watchFile(file.path);
-                        });
-                    }
-                });
-            }
-        };
-    }]);
+    });

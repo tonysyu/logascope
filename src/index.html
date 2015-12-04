@@ -36,7 +36,7 @@
 
             <div class="file-input pure-button pure-button-primary">
               <span>Watch file</span>
-              <input type="file" watch-file />
+              <input file-input type="file" on-file-change="watchFile" />
             </div>
 
             <label for="file-mode-selector">File mode:</label>
@@ -76,6 +76,7 @@
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
     <script src="js/highlightText.js"></script>
+    <script src="directives/fileInput.js"></script>
     <script src="directives/focusWhen.js"></script>
     <script src="components/on-enter/index.js"></script>
     <script src="components/search-box/index.js"></script>
