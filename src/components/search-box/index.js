@@ -1,7 +1,7 @@
 var angular = require('angular');
 
 angular.module('logascope')
-    .controller('searchBoxController', ['hotkeys', function(hotkeys) {
+    .controller('searchBoxController', ['$scope', 'hotkeys', function($scope, hotkeys) {
         // Create local `pageSearch` so we don't have to worry about what
         // `this` binds to in closures.
         var pageSearch = this.pageSearch = {
@@ -28,12 +28,9 @@ angular.module('logascope')
 
         hotkeys.add({
             combo: 'ctrl+f',
-            callback: createSearchCallback()
-        });
-
-        hotkeys.add({
-            combo: 'ctrl+shift+f',
-            callback: createSearchCallback({backwards: true})
+            callback: function () {
+                $scope.focusOnSearchBox = true;
+            }
         });
     }])
     .directive("searchBox", [function () {

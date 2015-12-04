@@ -5,6 +5,7 @@
       <label for="search-text">Find:</label>
       <input
         name="search-text"
+        focus-when="focusOnSearchBox"
         data-on-enter="ctrl.searchForward"
         data-on-shift-enter="ctrl.searchBackward"
         ng-model="ctrl.pageSearch.searchText">
