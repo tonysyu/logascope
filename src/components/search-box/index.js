@@ -23,6 +23,9 @@ angular.module('logascope')
             };
         };
 
+        this.searchForward = createSearchCallback();
+        this.searchBackward = createSearchCallback({backwards: true});
+
         hotkeys.add({
             combo: 'ctrl+f',
             callback: createSearchCallback()

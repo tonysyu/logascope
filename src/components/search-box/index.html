@@ -1,8 +1,14 @@
 <form class="pure-form pure-form-aligned">
   <fieldset>
+
     <div class="pure-control-group">
       <label for="search-text">Find:</label>
-      <input name="search-text" ng-model="ctrl.pageSearch.searchText"></input>
+      <input
+        name="search-text"
+        data-on-enter="ctrl.searchForward"
+        data-on-shift-enter="ctrl.searchBackward"
+        ng-model="ctrl.pageSearch.searchText">
+      </input>
     </div>
 
     <div class="pure-control-group">
