@@ -18,11 +18,12 @@ angular.module('logascope', ['ngSanitize', 'cfp.hotkeys'])
 
         $scope.code = {value: '', renderedValue: ''};
 
-        $scope.availableLanguages = highlightText.availableLanguages;
-        $scope.selectedLanguage = 'example-log';
-
-        $scope.availableFileModes = ['load', 'tail'];
-        $scope.selectedFileMode = 'tail';
+        $scope.logFile = {
+            availableLanguages: highlightText.availableLanguages,
+            selectedLanguage: 'example-log',
+            availableFileModes: ['load', 'tail'],
+            selectedFileMode: 'tail',
+        };
 
         function loadCodeFromFile(filePath) {
             var text = fs.readFileSync(filePath, 'utf8');
@@ -58,24 +59,24 @@ angular.module('logascope', ['ngSanitize', 'cfp.hotkeys'])
                 return;
             }
 
-            if ($scope.selectedFileMode === 'load') {
+            if ($scope.logFile.selectedFileMode === 'load') {
                 loadCodeFromFile(filePath);
-            } else if ($scope.selectedFileMode === 'tail') {
+            } else if ($scope.logFile.selectedFileMode === 'tail') {
                 tailCodeFromFile(filePath);
             }
         };
 
-        $scope.onFileModeChange = function () {
+        $scope.logFile.onModeChange = function () {
             if (watchedFile) {
                 $scope.watchFile(watchedFile);
             }
         };
 
-        $scope.onLanguageChange = function () {
+        $scope.logFile.onLanguageChange = function () {
             $scope.code.renderedValue = $scope.renderCode($scope.code.value);
         };
 
         $scope.renderCode = function (text) {
-            return highlightText.render($scope.selectedLanguage, text);
+            return highlightText.render($scope.logFile.selectedLanguage, text);
         };
     });
