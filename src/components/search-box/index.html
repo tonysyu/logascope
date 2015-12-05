@@ -1,16 +1,16 @@
+<div class="pure-control-group">
+  <label for="search-text"><span class="icono-search"></span></label>
+  <input
+    name="search-text"
+    focus-when="focusOnSearchBox"
+    data-on-enter="ctrl.searchForward"
+    data-on-shift-enter="ctrl.searchBackward"
+    ng-model="ctrl.pageSearch.searchText">
+  </input>
+</div>
+
 <form class="pure-form pure-form-aligned">
   <fieldset>
-
-    <div class="pure-control-group">
-      <label for="search-text">Find:</label>
-      <input
-        name="search-text"
-        focus-when="focusOnSearchBox"
-        data-on-enter="ctrl.searchForward"
-        data-on-shift-enter="ctrl.searchBackward"
-        ng-model="ctrl.pageSearch.searchText">
-      </input>
-    </div>
 
     <div class="pure-control-group">
       <label for="search-wrap">Wrap-around:</label>

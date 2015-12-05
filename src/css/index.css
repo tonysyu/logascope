@@ -1,3 +1,20 @@
+body {
+    color: #777;
+    font-size: 14px;
+}
+
+.pure-form select {
+    height: 1.5em;
+}
+
+.file-options .pure-control-group label {
+    width: 3em;
+}
+
+#search-box {
+    margin-top: 10px;
+}
+
 div.code-display {
     width: 100%;
     min-height: 300px;
